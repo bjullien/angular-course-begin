@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from '../model/course';
 
 @Component({
@@ -20,9 +20,23 @@ export class CourseCardComponent implements OnInit {
   @Input()
   course: Course;
 
+  /*
+    If no @Output() decorator => event not emitted
+    event emitter is renamed here, we add a tslint instruction to avoid warning
+  */
+  // tslint:disable-next-line: no-output-rename
+  @Output('courseSelected')
+  courseEmitter = new EventEmitter<Course>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onCourseViewed() {
+    console.log("CourseCardComponent - onCourseViewed()");
+
+    this.courseEmitter.emit(this.course);
   }
 
 }

@@ -6,9 +6,16 @@
 </div>
 
 <div class="courses">
-    <course-card [course]="coreCourse"></course-card>
-    <course-card [course]="rxjsCourse"></course-card>
-    <course-card [course]="ngrxCourse"></course-card>
+    <!-- let's replace standard (click) event by a custom event named (courseSelected)
+      <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card>
+
+      onCourseSelected: EventEmitter defined in CourseCardComponent class
+
+      also unlike native (click) event, custom events do not bubble up (propagate to parents)
+    -->
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="coreCourse"></course-card>
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="ngrxCourse"></course-card>
 </div>
 
 
