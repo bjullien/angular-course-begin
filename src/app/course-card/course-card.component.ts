@@ -20,6 +20,9 @@ export class CourseCardComponent implements OnInit {
   @Input()
   course: Course;
 
+  @Input()
+  cardIndex: number;
+
   /*
     If no @Output() decorator => event not emitted
     event emitter is renamed here, we add a tslint instruction to avoid warning
@@ -34,7 +37,7 @@ export class CourseCardComponent implements OnInit {
   }
 
   onCourseViewed() {
-    console.log("CourseCardComponent - onCourseViewed()");
+    console.log('CourseCardComponent - onCourseViewed()');
 
     this.courseEmitter.emit(this.course);
   }

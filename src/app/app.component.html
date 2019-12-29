@@ -6,16 +6,27 @@
 </div>
 
 <div class="courses">
-    <!-- let's replace standard (click) event by a custom event named (courseSelected)
+    <!--
+      let's replace standard (click) event by a custom event named (courseSelected)
       <course-card (click)="onCardClicked()" [course]="coreCourse"></course-card>
-
-      onCourseSelected: EventEmitter defined in CourseCardComponent class
-
-      also unlike native (click) event, custom events do not bubble up (propagate to parents)
+      - courseSelected: => @Output('courseSelected') courseEmitter = new EventEmitter<Course>();
+      - also unlike native (click) event, custom events do not bubble up (propagate to parents)
+      - [course]    => @Input() course: Course; in course-card.component.ts
+      - [cardIndex] => @Input() cardIndex: number; in course-card.component.ts
+      - [class]:
+            class variable of current DOM element
+            class = list of CSS classes applied to <course-card> element
+            class.is-first = : add is-first class to the list, defined in assets/styles.css
     -->
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="coreCourse"></course-card>
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjsCourse"></course-card>
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="ngrxCourse"></course-card>
+    <course-card
+      *ngFor="let course of courses; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd;"
+      [class.is-first]="isFirst"
+      [class.is-last]="isLast"
+      [class.is-even]="isEven"
+      [class.is-odd]="isOdd"
+      (courseSelected)="onCourseSelected($event)"
+      [course]="course" [cardIndex]="i + 1">
+    </course-card>
 </div>
 
 
